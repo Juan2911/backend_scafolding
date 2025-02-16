@@ -16,6 +16,7 @@ import lombok.Builder;
 @Builder
 public class ExampleDto {
 
+    private Long id;
     @NotBlank(message = "Cannot be blank")
     private String field1;
     @Min(value = 18, message = "Not under 18")

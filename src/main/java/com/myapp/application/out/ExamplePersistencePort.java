@@ -1,4 +1,7 @@
 package com.myapp.application.out;
 
-public interface ExamplePersistencePort {
+import com.myapp.domain.models.Example;
+import com.myapp.domain.useCases.ExampleOutputUseCases;
+
+public interface ExamplePersistencePort extends ExampleOutputUseCases<Example, Long> {
 }

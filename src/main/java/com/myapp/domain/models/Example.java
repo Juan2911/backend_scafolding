@@ -13,6 +13,7 @@ import lombok.Builder;
 @Builder
 public class Example {
 
+    private Long id;
     private String field1;
     private Integer field2;
 
