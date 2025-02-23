@@ -1,0 +1,36 @@
+name: Backport to Develop
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  backport:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create Backport Branch
+        run: |
+          git fetch origin develop
+          git checkout -b backport/master-to-develop origin/develop
+          git merge --no-ff master -m "Backport: Merge master into develop"
+          git push origin backport/master-to-develop
+
+      - name: Create Pull Request
+        uses: create-pull-request@v6
+        with:
+          branch: backport/master-to-develop
+          base: develop
+          title: "Backport: Merge master into develop"
+          body: "Automated backport of changes from master into develop"
+          labels: "backport"
+         
